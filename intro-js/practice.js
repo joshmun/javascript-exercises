@@ -48,3 +48,15 @@ Elephant.prototype.trumpet = function(){
 Elephant.prototype.grow = function(){
   this.height += 12;
 }
+
+Elephant.prototype.addTrick = function(trick){
+  this.arrayOftricks.push(trick);
+}
+
+Elephant.prototype.play = function(){
+  let min = 0;
+  let max = this.arrayOftricks.length;
+  let choice = Math.floor(Math.random() * (max - min)) + min;
+  let trick = this.arrayOftricks[choice];
+  console.log(this.name + " is " + trick);
+}
