@@ -60,3 +60,8 @@ Elephant.prototype.play = function(){
   let trick = this.arrayOftricks[choice];
   console.log(this.name + " is " + trick);
 }
+
+Elephant.prototype.paradeHelper = function(elephant){
+  console.log(elephant.name + " is trotting by!");
+}
+
