@@ -8,7 +8,21 @@ function my_uniq(array) {
 }
 
 function my_twoSum(array) {
-
+  let stack = [];
+  for (let i=0; i<array.length; i++){
+     let int = array[i];
+     array.forEach(function(item){
+      if(int + item === 0){
+        let pair = [];
+        pair.push(i);
+        pair.push(array.indexOf(item));
+        if(pair[0] != pair[1] && pair[0] < pair[1]){
+        stack.push(pair);
+        }
+      }
+     })
+  }
+  return stack;
 }
 
 function my_transpose(array) {
