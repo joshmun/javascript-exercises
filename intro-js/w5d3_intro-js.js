@@ -1,11 +1,11 @@
 function my_uniq(array) {
-  let stack = [];
+  let mySet = new Set();
   array.forEach(function(item){
-    if (stack.indexOf(item) === -1){
-      stack.push(item);
+    if (!mySet.has(item)){
+      mySet.add(item);
     }
   })
-  return stack;
+  return mySet;
 }
 
 function my_twoSum() {
