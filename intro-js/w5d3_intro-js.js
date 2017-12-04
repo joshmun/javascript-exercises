@@ -26,5 +26,13 @@ function my_twoSum(array) {
 }
 
 function my_transpose(array) {
-
+  let transpose = [];
+  for(let i=0; i<array.length; i++){
+    let column=[];
+    array.forEach(function(row){
+      column.push(row[i]);
+    })
+    transpose.push(column);
+  }
+  return transpose
 }
