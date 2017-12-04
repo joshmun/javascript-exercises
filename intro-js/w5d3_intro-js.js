@@ -1,3 +1,5 @@
+// array exercises
+
 function my_uniq(array) {
   let mySet = new Set();
   array.forEach(function(item){
@@ -35,4 +37,22 @@ function my_transpose(array) {
     transpose.push(column);
   }
   return transpose
+}
+
+// enumerable exercises
+function myEach(enums, callback){
+  let max = enums.length;
+  for (i=0; i<max; i++){
+    callback(enums[i]);
+  }
+}
+
+var puts = function(statement){
+  console.log(statement);
+}
+
+phrases = ['hi', 'ho', 'lets go!'];
+
+function myMap(enums, callback, myEach){
+  myEach(enums, callback)
 }
