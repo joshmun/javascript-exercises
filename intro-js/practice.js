@@ -35,10 +35,10 @@ function printCallback(array){
 
 titlelize(["Mary", "Brian", "Leo"], printCallback);
 
-function Elephant(name, height, tricks){
-  this.name = name;
-  this.height = height;
-  this.arrayOftricks = tricks;
+function Elephant(name, height, tricks) {
+  let this.name = name;
+  let this.height = height;
+  let this.arrayOftricks = tricks;
 }
 
 Elephant.prototype.trumpet = function(){
@@ -61,7 +61,4 @@ Elephant.prototype.play = function(){
   console.log(this.name + " is " + trick);
 }
 
-Elephant.prototype.paradeHelper = function(elephant){
-  console.log(elephant.name + " is trotting by!");
-}
 
