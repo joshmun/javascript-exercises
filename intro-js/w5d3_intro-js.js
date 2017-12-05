@@ -57,6 +57,7 @@ function myMap(enums, callback, myEach){
   myEach(enums, callback)
 }
 
+// iteration exercises
 function bubbleSort(array){
   array.forEach(function(item){
     for(let i=0; i<array.length; i++){
@@ -69,4 +70,17 @@ function bubbleSort(array){
     }
   })
   return array
+}
+
+function substrings(string){
+  let collection = [];
+  for(let i=0; i<string.length; i++){
+    for(let x=i+1; x<string.length+1; x++){
+      let tempSub = string.substring(i, x);
+      if (collection.indexOf(tempSub)  === -1 ){
+        collection.push(tempSub);
+      }
+    }
+  }
+  return collection;
 }
