@@ -56,3 +56,7 @@ phrases = ['hi', 'ho', 'lets go!'];
 function myMap(enums, callback, myEach){
   myEach(enums, callback)
 }
+
+function factors(){
+  
+}
