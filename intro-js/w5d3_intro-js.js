@@ -57,6 +57,16 @@ function myMap(enums, callback, myEach){
   myEach(enums, callback)
 }
 
-function factors(){
-  
+function bubbleSort(array){
+  array.forEach(function(item){
+    for(let i=0; i<array.length; i++){
+      if(array[i]>array[i+1]){
+        let less = array[i+1];
+        let more = array[i];
+        array[i] = less;
+        array[i+1] = more;
+      }
+    }
+  })
+  return array
 }
