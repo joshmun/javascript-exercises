@@ -8,14 +8,14 @@ function _makeGrid () {
   w = new Piece("white");
   b = new Piece("black");
   let board = [
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, w, b, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, b, w, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
-  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined] ];
+  [null, null, null, null, null, null, null, null], 
+  [null, null, null, null, null, null, null, null], 
+  [null, null, null, null, null, null, null, null], 
+  [null, null, null, w, b, null, null, null], 
+  [null, null, null, b, w, null, null, null], 
+  [null, null, null, null, null, null, null, null], 
+  [null, null, null, null, null, null, null, null], 
+  [null, null, null, null, null, null, null, null] ];
   return board;
 }
 
@@ -49,22 +49,45 @@ Board.prototype.hasMove = function (color) {
   if(color==="white"){
     grid.forEach(function(row, index){
       for(let i=0; i<row.length; i++){
-        if(row[i]===undefined){
+        if(row[i]===null){
           continue;
         }
         else if(row[i].color==="black"){
-          if(row[i+1]===undefined){
+          if(row[i+1]===null){
             move = true;
           }
-          if(grid[index-1][i]===undefined){
-            move = true;
+
+          if(i<1){
+            continue;
           }
-          if(row[i-1]===undefined){
-            move = true;
+          else{
+            if(row[i-1]===null){
+              move = true;
+            }
           }
-          if(grid[index+1][i]===undefined){
-            move = true;
+
+          if(index>6){
+            if(grid[index-1][i]===null){
+              move = true;
+            }
           }
+          else{
+            if(grid[index+1][i]===null){
+                move = true;
+              }
+          }
+
+          if(index < 1){
+            if(grid[index+1][i]===null){
+                move = true;
+              }
+          }
+          else{
+            if(grid[index-1][i]===null){
+              move = true;
+            }
+          }
+
         }
       }
     })
@@ -73,11 +96,11 @@ Board.prototype.hasMove = function (color) {
   else {
     grid.forEach(function(row, index){
       for(let i=0; i<row.length; i++){
-        if(row[i]===undefined){
+        if(row[i]===null){
           continue;
         }
         else if(row[i].color==="white"){
-          if(row[i+1]===undefined){
+          if(row[i+1]===null){
             move = true;
           }
 
@@ -85,25 +108,29 @@ Board.prototype.hasMove = function (color) {
             continue;
           }
           else{
-            if(row[i-1]===undefined){
+            if(row[i-1]===null){
               move = true;
             }
           }
 
           if(index>6){
-            continue;
+            if(grid[index-1][i]===null){
+              move = true;
+            }
           }
           else{
-            if(grid[index+1][i]===undefined){
+            if(grid[index+1][i]===null){
                 move = true;
               }
           }
 
           if(index < 1){
-            continue;
+            if(grid[index+1][i]===null){
+                move = true;
+              }
           }
           else{
-            if(grid[index-1][i]===undefined){
+            if(grid[index-1][i]===null){
               move = true;
             }
           }
@@ -120,6 +147,12 @@ Board.prototype.hasMove = function (color) {
  * matches a given color.
  */
 Board.prototype.isMine = function (pos, color) {
+  let piece = this.grid[pos[1]][pos[0]];
+  if (piece === null){
+    return false;
+  }
+  else if(this.grid[pos[1]][pos[0]].color === color) return true;
+  else { return false; }
 };
 
 /**
@@ -133,6 +166,12 @@ Board.prototype.isOccupied = function (pos) {
  * the black player are out of moves.
  */
 Board.prototype.isOver = function () {
+  if(!this.hasMove("white") && !this.hasMove("black")){
+    return true;
+  }
+  else{
+    return false;
+  }
 };
 
 /**
