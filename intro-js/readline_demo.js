@@ -1,26 +1,20 @@
-const readline = require('readline');
+function absurdTimes(numTimes, fn) {
+  let i = 0;
 
-const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+  function loopStep() {
+    if (i == numTimes) {
+      // we're done, stop looping
+      return;
+    }
 
-function addTwoNumbers(callback) {
-  // Notice how nowhere do I return anything here! You never return in
-  // async code. Since the caller will not wait for the result, you
-  // can't return anything to them.
+    fn();
 
-  reader.question("Enter #1: ", function (numString1) {
-    reader.question("Enter #2: ", function (numString2) {
-      const num1 = parseInt(numString1);
-      const num2 = parseInt(numString2);
-
-      callback(num1 + num2);
-    });
-  });
+    i++;
+    // recursively call loopStep
+    console.log("inner loop step")
+    loopStep();
+  }
+  console.log("outer loop step")
+  loopStep();
 }
 
-addTwoNumbers(function (result) {
-  console.log(`The result is: ${result}`);
-  reader.close();
-});
