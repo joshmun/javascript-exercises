@@ -266,6 +266,9 @@ Board.prototype.placePiece = function (pos, color) {
  * Prints a string representation of the Board to the console.
  */
 Board.prototype.print = function () {
+  this.grid.forEach(row => {
+    console.log(row.toString(' '));
+  })
 };
 
 /**
