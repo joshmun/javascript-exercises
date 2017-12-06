@@ -159,6 +159,12 @@ Board.prototype.isMine = function (pos, color) {
  * Checks if a given position has a piece on it.
  */
 Board.prototype.isOccupied = function (pos) {
+  if(this.grid[pos[1]][pos[0]]===null){
+    return false;
+  }
+  else{
+    return true;
+  }
 };
 
 /**
@@ -215,6 +221,11 @@ function _positionsToFlip (board, pos, color, dir, piecesToFlip) {
  * Throws an error if the position represents an invalid move.
  */
 Board.prototype.placePiece = function (pos, color) {
+    let x = pos[0];
+    let y = pos[1];
+    if(this.isValidPos(pos) && !this.isOccupied(pos)){
+      this.grid[x][y] = new Piece(color);
+    }
 };
 
 /**
