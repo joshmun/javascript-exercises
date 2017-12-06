@@ -84,3 +84,4 @@ function substrings(string){
   }
   return collection;
 }
+

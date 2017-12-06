@@ -4,7 +4,19 @@ let Piece = require("./piece");
  * Returns a 2D array (8 by 8) with two black pieces at [3, 4] and [4, 3]
  * and two white pieces at [3, 3] and [4, 4]
  */
-function _makeGrid () {
+function _makeGrid () { 
+  w = new Piece("white");
+  b = new Piece("black");
+  let board = [
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, w, b, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, b, w, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined], 
+  [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined] ];
+  return board;
 }
 
 /**
@@ -25,12 +37,82 @@ Board.DIRS = [
  * throwing an Error if the position is invalid.
  */
 Board.prototype.getPiece = function (pos) {
+  return this.grid[pos[1]][pos[0]];
 };
 
 /**
  * Checks if there are any valid moves for the given color.
  */
 Board.prototype.hasMove = function (color) {
+  let move = false;
+  let grid = this.grid;
+  if(color==="white"){
+    grid.forEach(function(row, index){
+      for(let i=0; i<row.length; i++){
+        if(row[i]===undefined){
+          continue;
+        }
+        else if(row[i].color==="black"){
+          if(row[i+1]===undefined){
+            move = true;
+          }
+          if(grid[index-1][i]===undefined){
+            move = true;
+          }
+          if(row[i-1]===undefined){
+            move = true;
+          }
+          if(grid[index+1][i]===undefined){
+            move = true;
+          }
+        }
+      }
+    })
+  }
+
+  else {
+    grid.forEach(function(row, index){
+      for(let i=0; i<row.length; i++){
+        if(row[i]===undefined){
+          continue;
+        }
+        else if(row[i].color==="white"){
+          if(row[i+1]===undefined){
+            move = true;
+          }
+
+          if(i<1){
+            continue;
+          }
+          else{
+            if(row[i-1]===undefined){
+              move = true;
+            }
+          }
+
+          if(index>6){
+            continue;
+          }
+          else{
+            if(grid[index+1][i]===undefined){
+                move = true;
+              }
+          }
+
+          if(index < 1){
+            continue;
+          }
+          else{
+            if(grid[index-1][i]===undefined){
+              move = true;
+            }
+          }
+
+        }
+      }
+    })
+  }
+  return move;
 };
 
 /**
@@ -106,3 +188,4 @@ Board.prototype.validMoves = function (color) {
 };
 
 module.exports = Board;
+
