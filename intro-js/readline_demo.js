@@ -5,12 +5,22 @@ const reader = readline.createInterface({
   output: process.stdout
 });
 
-reader.question("What is your name?", function (answer) {
-  console.log(`Hello ${answer}!`);
+function addTwoNumbers(callback) {
+  // Notice how nowhere do I return anything here! You never return in
+  // async code. Since the caller will not wait for the result, you
+  // can't return anything to them.
 
-  // Close the reader, which will allow the program to end because it
-  // is no longer waiting for any events.
+  reader.question("Enter #1: ", function (numString1) {
+    reader.question("Enter #2: ", function (numString2) {
+      const num1 = parseInt(numString1);
+      const num2 = parseInt(numString2);
+
+      callback(num1 + num2);
+    });
+  });
+}
+
+addTwoNumbers(function (result) {
+  console.log(`The result is: ${result}`);
   reader.close();
 });
-
-console.log("Last program line");
