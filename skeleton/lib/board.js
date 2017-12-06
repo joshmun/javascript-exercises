@@ -178,6 +178,18 @@ Board.prototype.isOver = function () {
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
+  let x = pos[0];
+  let y = pos[1];
+  switch (true){
+    case x<0 || x>7:
+      return false;
+      break;
+    case y<0 || y>7:
+      return false;
+      break;
+    default:
+      return true;
+  }
 };
 
 /**
