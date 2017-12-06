@@ -77,4 +77,8 @@ Game.prototype.runLoop = function (overCallback) {
   }
 };
 
+Game.prototype.placePiece = function (position, color){
+  
+}
+
 module.exports = Game;
